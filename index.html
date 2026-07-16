@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <div class="header__content wrapper">
             <a href="#" class="header__logo">Movie Search</a>
             <nav class="header__nav" aria-label="Основная навигация">
@@ -26,16 +26,10 @@
                 </form>
 
                 <p class="message message--loading" id="loading" hidden>Загрузка...</p>
-                <p class="message message--error" id="error" hidden></p>
+                <p class="message message--error" id="error" hidden>Лол че то сломалось</p>
                 <p class="message message--no-results" id="no-results" hidden>Ничего не найдено</p>
 
                 <div class="movie-grid" id="movie-grid">
-                    <div class="movie-card">
-                        <img src="" alt="" class="movie-card__poster">
-                        <h3 class="movie-card__title"></h3>
-                        <button type="button" class="movie-card__btn-details-favorite">Добавить в избранное</button>
-                        <button type="button" class="movie-card__btn-details-view">Подробнее</button>
-
                         <!-- временные карточки для верстке -->
                         <article class="movie-card">
                             <img 
@@ -70,8 +64,6 @@
                             <button type="button" class="movie-card__btn movie-card__btn--details">Подробнее</button>
                         </article>
                         <!-- временные карточки для верстке -->
-
-                    </div>
                 </div>
             </section>
 

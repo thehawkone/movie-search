@@ -1,12 +1,130 @@
+@charset "UTF-8";
 * {
-  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: #e8eaed;
+  line-height: 1.5;
+}
+
+body {
   margin: 0;
-  padding: 0;
-  text-decoration: none;
-  list-style: none;
+  background: #0f1419;
+}
+
+button {
+  color: #e8eaed;
+  background-color: #1a2332;
 }
 
 .wrapper {
-  max-width: 1296px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 16px;
+}
+
+.header {
+  background: #1a2332;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.header .header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .header__logo {
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #9e1a21;
+}
+.header .header__nav {
+  display: flex;
+  gap: 8px;
+}
+.header .nav__btn {
+  background-color: transparent;
+  border: 2px solid #9e1a21;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.header .nav__btn:hover {
+  background-color: #9e1a21; /* Полупрозрачный фон */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Эффект свечения */
+  border-color: #9e1a21; /* Можно также сменить цвет рамки при наведении */
+}
+
+.search-form {
+  display: flex;
+  gap: 16px;
+  padding-top: 16px;
+  margin-bottom: 24px;
+}
+
+#search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a2332;
+  color: #e8eaed;
+  font-size: 16px;
+}
+
+.search-btn {
+  padding: 12px 24px;
+  background: #9e1a21;
+  color: #e8eaed;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.search-btn:hover {
+  background-color: #9e1a21; /* Полупрозрачный фон */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Эффект свечения */
+  border-color: #9e1a21; /* Можно также сменить цвет рамки при наведении */
+}
+
+.movie-grid {
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.movie-card {
+  background: #1a2332;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.movie-card:hover {
+  transform: scale(1.03);
+}
+.movie-card__poster {
+  aspect-ratio: 2/3;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  background: #333;
+}
+.movie-card__title {
+  padding: 8px 12px 4px;
+  font-size: 14px;
+}
+.movie-card__year {
+  padding: 0 12px 12px;
+  font-size: 12px;
+  color: #9aa0a6;
+}
+
+.message {
+  text-align: center;
+  padding: 24px;
+  color: #9aa0a6;
+}
+.message--error {
+  color: #9e1a21;
 }/*# sourceMappingURL=main.css.map */
