@@ -3,15 +3,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Search</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <div class="container">
-        <div class="search-box">
-            <input type="text" placeholder="Введите название фильма" id="search-input">
-            <button id="search-button">Search</button>
+    <header>
+        <div class="header__content wrapper">
+            <a href="#" class="header__logo">Movie Search</a>
+            <nav class="header__nav" aria-label="Основная навигация">
+                <button type="button" class="nav__btn" id="search-btn">Поиск</button>
+                <button type="button" class="nav__btn" id="favorites-btn">Избранное</button>
+            </nav>
         </div>
-        <div class="movie-grid" id="movie-grid"></div>
-    </div>
+    </header>
+
+    <main>
+        <div class="main__content wrapper">
+            
+            <section class="search-view" id="search-view">
+                <form class="search-form" id="search-form">
+                    <input type="text" placeholder="Введите название фильма" id="search-input">
+                    <button type="submit" class="search-btn">Поиск</button>
+                </form>
+
+                <p class="message message--loading" id="loading" hidden>Загрузка...</p>
+                <p class="message message--error" id="error" hidden></p>
+                <p class="message message--no-results" id="no-results" hidden>Ничего не найдено</p>
+
+                <div class="movie-grid" id="movie-grid">
+                    <div class="movie-card">
+                        <img src="" alt="" class="movie-card__poster">
+                        <h3 class="movie-card__title"></h3>
+                        <button type="button" class="movie-card__btn-details-favorite">Добавить в избранное</button>
+                        <button type="button" class="movie-card__btn-details-view">Подробнее</button>
+
+                        <!-- временные карточки для верстке -->
+                        <article class="movie-card">
+                            <img 
+                                src="https://m.media-amazon.com/images/M/MV5B..." 
+                                alt="Постер фильма Матрица" 
+                                class="movie-card__poster"
+                            >
+                            <h3 class="movie-card__title">Матрица</h3>
+                            <p class="movie-card__year">1999</p>
+                            <button type="button" class="movie-card__btn movie-card__btn--details">Подробнее</button>
+                        </article>
+
+                        <article class="movie-card">
+                            <img 
+                                src="https://m.media-amazon.com/images/M/MV5B..." 
+                                alt="Постер фильма Матрица" 
+                                class="movie-card__poster"
+                            >
+                            <h3 class="movie-card__title">Матрица</h3>
+                            <p class="movie-card__year">1999</p>
+                            <button type="button" class="movie-card__btn movie-card__btn--details">Подробнее</button>
+                        </article>
+
+                        <article class="movie-card">
+                            <img 
+                                src="https://m.media-amazon.com/images/M/MV5B..." 
+                                alt="Постер фильма Матрица" 
+                                class="movie-card__poster"
+                            >
+                            <h3 class="movie-card__title">Матрица</h3>
+                            <p class="movie-card__year">1999</p>
+                            <button type="button" class="movie-card__btn movie-card__btn--details">Подробнее</button>
+                        </article>
+                        <!-- временные карточки для верстке -->
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="details-view" id="details-view" hidden>
+                <div class="movie-details">
+                    <button type="button" class="details-btn" id="back-btn">Назад</button>
+                    <div class="movie-info">
+                        <img src="" alt="" class="movie-info__poster">
+                        <h3 class="movie-info__title"></h3>
+                        <p class="movie-info__rating">Рейтинг: 8.7</p>
+                        <p class="movie-info__director">Режиссёр: </p>
+                        <p class="movie-info__actors">В ролях: </p>
+                        <p class="movie-info__year"></p>
+                        <p class="movie-info__genre"></p>
+                        <p class="movie-info__plot"></p>
+                    </div>
+                    <button type="button" class="movie-card__btn-favorite">Добавить в избранное</button>
+                </div>
+            </section>
+
+
+            <section class="favorites-view" id="favorites-view" hidden>
+                <div class="favorites-grid">
+                    <!-- временные карточки для верстке -->
+                    <article class="movie-card">
+                        <img 
+                            src="https://m.media-amazon.com/images/M/MV5B..." 
+                            alt="Постер фильма Матрица" 
+                            class="movie-card__poster"
+                        >
+                        <h3 class="movie-card__title">Матрица</h3>
+                        <p class="movie-card__year">1999</p>
+                        <button type="button" class="movie-card__btn movie-card__btn--details">Подробнее</button>
+                    </article>
+
+                    <article class="movie-card">
+                        <img 
+                            src="https://m.media-amazon.com/images/M/MV5B..." 
+                            alt="Постер фильма Матрица" 
+                            class="movie-card__poster"
+                        >
+                        <h3 class="movie-card__title">Матрица</h3>
+                        <p class="movie-card__year">1999</p>
+                        <button type="button" class="movie-card__btn movie-card__btn--details">Подробнее</button>
+                    </article>
+                    <!-- временные карточки для верстке -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="js/app.js" type="module"></script>
 </body>
-    <script src="app.js" type="module"></script>
 </html>
