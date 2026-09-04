@@ -43,7 +43,7 @@ button {
         font-size: 24px;
         font-weight: 700;
         text-decoration: none;
-        color: $accent;
+        color: $text;
     }
 
     .header__nav {
@@ -175,7 +175,6 @@ button {
     background: transparent;
     cursor: pointer;
     margin-bottom: 24px;
-    transition: all 0.3s ease-in-out;
 
     transition: all 0.3s ease-in-out;
     &:hover {
@@ -186,7 +185,6 @@ button {
 }
 
 .movie-info {
-    border: 1px solid red;
     display: grid;
     grid-template-columns: 250px 1fr;
     gap: 12px 38px;
