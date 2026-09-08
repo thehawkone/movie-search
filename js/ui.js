@@ -1,4 +1,5 @@
-import { searchMovies } from "./api.js";
+import { getState, searchMovies, startSearch } from './store.js';
+import { NO_POSTER, getPosterUrl } from './utils.js';
 
 export function initUI() {
     let previousView = 'search';
@@ -15,7 +16,11 @@ export function initUI() {
     const movieGrid = document.getElementById('movie-grid');
     const favoritesGrid = document.getElementById('favorites-grid');
 
-    const logo = document.querySelector('.header__logo')
+    const loadingEl = document.getElementById('loading');
+    const errorEl = document.getElementById('error');
+    const noResultsEl = document.getElementById('no-results');
+
+    const logo = document.querySelector('.header__logo');
 
     function showView(viewName) {
         searchView.hidden = viewName !== 'search';
@@ -49,21 +54,65 @@ export function initUI() {
     searchForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const query = document.getElementById('search-input').ariaValueMax.trim();
+        const query = document.getElementById('search-input').value.trim();
         if (!query) return;
 
-        try {
-            const movies = await searchMovies(query);
-            console.log(movies);
-        } catch (error) {
-            console.error(error.message);
-        }
+        startSearch();
+        renderStatus();
+        await searchMovies(query);
+        renderStatus();
+        renderMovies();
+        console.log(getState().movies);  // ← добавь эту строку
+
     });
 
     logo.addEventListener('click', (e) => {
         e.preventDefault();
         showView('search');
     });
+
+    function createMovieCard(movie) {
+        const card = document.createElement('article');
+        card.className = 'movie-card';
+        card.dataset.imdbID = movie.imdbID;
+
+        const posterSrc = movie.Poster !== 'N/A' ? movie.Poster : NO_POSTER;
+
+        card.innerHTML = `
+            <img 
+                src="${posterSrc}"
+                alt="Постер ${movie.Title}"
+                class="movie-card__poster"
+                onerror="this.onerror=null; this.src='${NO_POSTER}'"
+            >
+            <h3 class="movie-card__title">${movie.Title}</h3>
+            <p class="movie-card__year">${movie.Year}</p>
+        `;
+
+        return card;
+    }
+
+    function renderStatus() {
+        const { loading, error, movies } = getState();
+
+        loadingEl.hidden = !loading;
+        errorEl.hidden = !error;
+        noResultsEl.hidden = loading || error || movies.length > 0;
+
+        if (error) {
+            errorEl.textContent = error;
+        }
+    }
+
+    function renderMovies() {
+        const { movies } = getState();
+
+        movieGrid.innerHTML = '';
+
+        movies.forEach((movie) => {
+            movieGrid.appendChild(createMovieCard(movie));
+        });
+    }
 
     showView('search');
 }
