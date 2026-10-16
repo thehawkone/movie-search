@@ -185,9 +185,9 @@ export function initUI() {
         document.getElementById('detail-rating').textContent = `Рейтинг: ${selectedMovie.imdbRating}`;
         document.getElementById('detail-director').textContent = `Режиссёр: ${selectedMovie.Director}`;
         document.getElementById('detail-actors').textContent = `В ролях: ${selectedMovie.Actors}`;
-        document.getElementById('detail-year').textContent = selectedMovie.Year;
-        document.getElementById('detail-genre').textContent = selectedMovie.Genre;
-        document.getElementById('detail-plot').textContent = selectedMovie.Plot;
+        document.getElementById('detail-year').textContent = 'Год: ' + selectedMovie.Year;
+        document.getElementById('detail-genre').textContent = 'Жанр: ' + selectedMovie.Genre;
+        document.getElementById('detail-plot').textContent = 'Описание: ' + selectedMovie.Plot;
         renderFavoriteBtn();
     }
 
