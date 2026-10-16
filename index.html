@@ -38,47 +38,24 @@
                 <div class="movie-details">
                     <button type="button" class="details-btn" id="back-btn">Назад</button>
                     <div class="movie-info">
-                        <img src="https://cdn.ananasposter.ru/image/cache/catalog/poster/film/78/28143-1000x830.jpg" alt="Матрица" class="movie-info__poster">
+                        <img src="" alt="" class="movie-info__poster" id="detail-poster">
                         <div class="movie-info__content">
-                            <h3 class="movie-info__title">Матрица</h3>
-                            <p class="movie-info__rating">Рейтинг: 8.7</p>
-                            <p class="movie-info__director">Режиссёр: Wachowski</p>
-                            <p class="movie-info__actors">В ролях: Keanu Reeves, Laurence Fishburne</p>
-                            <p class="movie-info__year">1999</p>
-                            <p class="movie-info__genre">Action, Sci-Fi</p>
-                            <p class="movie-info__plot">Neo узнаёт, что реальность — симуляция...</p>
+                            <h3 class="movie-info__title" id="detail-title"></h3>
+                            <p class="movie-info__rating" id="detail-rating"></p>
+                            <p class="movie-info__director" id="detail-director"></p>
+                            <p class="movie-info__actors" id="detail-actors"></p>
+                            <p class="movie-info__year" id="detail-year"></p>
+                            <p class="movie-info__genre" id="detail-genre"></p>
+                            <p class="movie-info__plot" id="detail-plot"></p>
                         </div>
                     </div>
-                    <button type="button" class="movie-card__btn-favorite">Добавить в избранное</button>
+                    <button type="button" class="movie-card__btn-favorite" id="favorite-btn">Добавить в избранное</button>
                 </div>
             </section>
 
 
             <section class="favorites-view" id="favorites-view" hidden>
                 <div class="favorites-grid" id="favorites-grid">
-                    <!-- временные карточки для верстке -->
-                    <article class="movie-card">
-                        <img 
-                            src="https://m.media-amazon.com/images/M/MV5B..." 
-                            alt="Постер фильма Матрица" 
-                            class="movie-card__poster"
-                        >
-                        <h3 class="movie-card__title">Матрица</h3>
-                        <p class="movie-card__year">1999</p>
-                        <button type="button" class="movie-card__btn movie-card__btn--details">Подробнее</button>
-                    </article>
-
-                    <article class="movie-card">
-                        <img 
-                            src="https://m.media-amazon.com/images/M/MV5B..." 
-                            alt="Постер фильма Матрица" 
-                            class="movie-card__poster"
-                        >
-                        <h3 class="movie-card__title">Матрица</h3>
-                        <p class="movie-card__year">1999</p>
-                        <button type="button" class="movie-card__btn movie-card__btn--details">Подробнее</button>
-                    </article>
-                    <!-- временные карточки для верстке -->
                 </div>
             </section>
 

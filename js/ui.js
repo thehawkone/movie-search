@@ -1,4 +1,4 @@
-import { getState, searchMovies, startSearch } from './store.js';
+import { getState, searchMovies, startSearch, openMovie, toggleFavorite, getFavorites } from './store.js';
 import { NO_POSTER, getPosterUrl } from './utils.js';
 
 export function initUI() {
@@ -32,23 +32,41 @@ export function initUI() {
     };
 
     searchBtn.addEventListener('click', () => showView('search'));
-    favoritesBtn.addEventListener('click', () => showView('favorites'));
+    favoritesBtn.addEventListener('click', () =>  {
+            showView('favorites');
+            renderFavorites();
+        }
+    );
     backBtn.addEventListener('click', () => showView(previousView));
 
-    movieGrid.addEventListener('click', (e) => {
+    movieGrid.addEventListener('click', async (e) => {
         const card = e.target.closest('.movie-card');
         if (!card) return;
+
+        const imdbID = card.dataset.imdbID;
+        if (!imdbID) return;
 
         previousView = 'search';
         showView('details');
+
+        await openMovie(imdbID);
+        renderStatus();
+        renderDetails();
     });
 
-    favoritesGrid.addEventListener('click', (e) => {
+    favoritesGrid.addEventListener('click', async (e) => {
         const card = e.target.closest('.movie-card');
         if (!card) return;
 
+        const imdbID = card.dataset.imdbID;
+        if (!imdbID) return;
+
         previousView = 'favorites';
         showView('details');
+
+        await openMovie(imdbID);
+        renderStatus();
+        renderDetails();
     })
 
     searchForm.addEventListener('submit', async (e) => {
@@ -62,13 +80,17 @@ export function initUI() {
         await searchMovies(query);
         renderStatus();
         renderMovies();
-        console.log(getState().movies);  // ← добавь эту строку
-
     });
 
     logo.addEventListener('click', (e) => {
         e.preventDefault();
         showView('search');
+    });
+
+    document.getElementById('favorite-btn').addEventListener('click', () => {
+        toggleFavorite();
+        renderFavoriteBtn();
+        renderFavorites();
     });
 
     function createMovieCard(movie) {
@@ -112,6 +134,45 @@ export function initUI() {
         movies.forEach((movie) => {
             movieGrid.appendChild(createMovieCard(movie));
         });
+    }
+
+    function renderFavorites() {
+        const { favorites } = getState();
+        favoritesGrid.innerHTML = '';
+
+        favorites.forEach((movie) => {
+            favoritesGrid.appendChild(createMovieCard(movie));
+        });
+    }
+    
+    function renderFavoriteBtn() {
+        const { selectedMovie } = getState();
+        const btn = document.getElementById('favorite-btn');
+        if (!selectedMovie) return;
+
+        
+        btn.textContent = getFavorites(selectedMovie.imdbID)
+         ? 'Удалить из избранного'
+         : 'Добавить в избранное';
+    }
+
+
+    function renderDetails() {
+        const { selectedMovie } = getState();
+        if (!selectedMovie) return;
+
+        const posterSrc = selectedMovie.Poster !== 'N/A' ? selectedMovie.Poster : NO_POSTER;
+        
+        document.getElementById('detail-poster').src = posterSrc;
+        document.getElementById('detail-poster').alt = selectedMovie.Title;
+        document.getElementById('detail-title').textContent = selectedMovie.Title;
+        document.getElementById('detail-rating').textContent = `Рейтинг: ${selectedMovie.imdbRating}`;
+        document.getElementById('detail-director').textContent = `Режиссёр: ${selectedMovie.Director}`;
+        document.getElementById('detail-actors').textContent = `В ролях: ${selectedMovie.Actors}`;
+        document.getElementById('detail-year').textContent = selectedMovie.Year;
+        document.getElementById('detail-genre').textContent = selectedMovie.Genre;
+        document.getElementById('detail-plot').textContent = selectedMovie.Plot;
+        renderFavoriteBtn();
     }
 
     showView('search');
