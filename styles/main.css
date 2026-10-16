@@ -90,16 +90,15 @@ button {
   border-color: #9e1a21; /* Можно также сменить цвет рамки при наведении */
 }
 
-.movie-grid {
+.movie-grid,
+.favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 16px;
 }
 
-.favorites-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 16px;
+.favorites-view {
+  padding-top: 16px;
 }
 
 .movie-card {

@@ -104,17 +104,15 @@ button {
     }
 }
 
-.movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: $gap;
-
-}
-
+.movie-grid,
 .favorites-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: $gap;
+}
+
+.favorites-view {
+    padding-top: 16px;
 }
 
 .movie-card {

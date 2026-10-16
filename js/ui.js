@@ -1,5 +1,5 @@
 import { getState, searchMovies, startSearch, openMovie, toggleFavorite, getFavorites } from './store.js';
-import { NO_POSTER, getPosterUrl } from './utils.js';
+import { NO_POSTER, getPosterUrl, debounce } from './utils.js';
 
 export function initUI() {
     let previousView = 'search';
@@ -19,6 +19,8 @@ export function initUI() {
     const loadingEl = document.getElementById('loading');
     const errorEl = document.getElementById('error');
     const noResultsEl = document.getElementById('no-results');
+
+    const searchInput = document.getElementById('search-input');
 
     const logo = document.querySelector('.header__logo');
 
@@ -73,13 +75,7 @@ export function initUI() {
         e.preventDefault();
 
         const query = document.getElementById('search-input').value.trim();
-        if (!query) return;
-
-        startSearch();
-        renderStatus();
-        await searchMovies(query);
-        renderStatus();
-        renderMovies();
+        await runSearch(query);
     });
 
     logo.addEventListener('click', (e) => {
@@ -92,6 +88,26 @@ export function initUI() {
         renderFavoriteBtn();
         renderFavorites();
     });
+
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        
+        if (query.length < 3) return;
+        
+        runSearchDebounced(query);
+    });
+
+    async function runSearch(query) {
+        if (!query) return;
+
+        startSearch();
+        renderStatus();
+        await searchMovies(query);
+        renderStatus();
+        renderMovies();
+    }
+
+    const runSearchDebounced = debounce((query) => runSearch(query), 500);
 
     function createMovieCard(movie) {
         const card = document.createElement('article');
@@ -175,5 +191,6 @@ export function initUI() {
         renderFavoriteBtn();
     }
 
+    renderFavorites();
     showView('search');
 }
